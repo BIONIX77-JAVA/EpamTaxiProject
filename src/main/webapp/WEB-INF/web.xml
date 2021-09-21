@@ -3,4 +3,97 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <servlet>
+        <servlet-name>GetStartPageServlet</servlet-name>
+        <servlet-class>com.epam.java.project.servlets.servlet.GetIndexPageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetStartPageServlet</servlet-name>
+        <url-pattern>/main_page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditConferenceServlet</servlet-name>
+        <servlet-class>com.epam.java.project.servlets.servlet.EditConferenceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditConferenceServlet</servlet-name>
+        <url-pattern>/edit_conference</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>DeleteConferenceServlet</servlet-name>
+        <servlet-class>com.epam.java.project.servlets.servlet.DeleteConferenceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteConferenceServlet</servlet-name>
+        <url-pattern>/delete_conference</url-pattern>
+    </servlet-mapping>
+
+    <!--Logout servlet-->
+    <servlet>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>com.epam.java.project.servlets.servlet.SignUpServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SignUpServlet</servlet-name>
+        <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.epam.java.project.servlets.servlet.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <!--Encoding filter UTF-8 for all requests-->
+    <filter>
+        <filter-name>EncodingRequestFilter</filter-name>
+        <filter-class>com.epam.java.project.servlets.filter.EncodingRequestFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingRequestFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
+
+    <!--Encoding filter UTF-8 for all requests-->
+    <filter>
+        <filter-name>EncodingResponseFilter</filter-name>
+        <filter-class>com.epam.java.project.servlets.filter.EncodingResponseFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingResponseFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.epam.java.project.servlets.filter.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>
+            com.epam.java.project.servlets.ContextListener
+        </listener-class>
+    </listener>
+
 </web-app>

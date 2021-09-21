@@ -21,7 +21,7 @@
 	max-width: 768px;
 	width: 100%;
 	margin: auto;
-	background: #1a1b1d;
+	background: url('../css/img/background.jpg');
 }
 
 .booking-form>.booking-bg {
@@ -29,14 +29,14 @@
 	left: 0px;
 	top: 0px;
 	bottom: 0px;
-	width: 310px;
-	background-image: url('../colorlib-booking-13/img/background.jpg');
+	width: 200px;
+	background-image: url('../css/img/background.jpg');
 	background-size: cover;
 	background-position: center;
 }
 
 .booking-form>form {
-	margin-left: 310px;
+	margin-left: 50px;
 	padding: 30px;
 }
 
@@ -47,7 +47,7 @@
 .booking-form .form-header h2 {
 	margin: 0;
 	font-weight: 400;
-	color: #fff;
+	color: #5c6a65;
 	font-size: 42px;
 	text-transform: uppercase;
 	text-align: center;
@@ -61,13 +61,12 @@
 .booking-form .form-control {
 	background-color: transparent;
 	height: 65px;
-	padding: 0px;
-	padding-top: 15px;
-	border-radius: 0px;
+	padding: 15px 10px 10px;
+	border-radius: 10px;
 	-webkit-transition: 0.2s;
 	transition: 0.2s;
 	color: #fff;
-	border: 0px;
+	border: 10px;
 	font-size: 16px;
 	font-weight: 700;
 	-webkit-box-shadow: none;
