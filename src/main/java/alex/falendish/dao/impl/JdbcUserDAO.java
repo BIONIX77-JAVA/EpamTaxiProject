@@ -8,6 +8,7 @@ import alex.falendish.utils.Role;
 import alex.falendish.utils.UserStatus;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,12 +17,21 @@ import static alex.falendish.utils.CommonUtils.isBlank;
 public class JdbcUserDAO implements UserDAO {
 
     private final ConnectionPool connectionPool = CustomConnectionPool.getInstance();
-    public final List<User> store = new ArrayList<>();
+
+
+    private List<User> users;
+
+    public JdbcUserDAO() {
+        this.users = Arrays.asList(
+                new User(987654567l, "nikita@gmail.com", "098908", "Nikita", "Todo", Collections.singleton(Role.USER), UserStatus.ACTIVE, false, LocalDateTime.now()),
+                new User(987655457l, "TOM@gmail.com", "FIGHT8", "Tomi", "Rear", Collections.singleton(Role.USER), UserStatus.ACTIVE, false, LocalDateTime.now())
+        );
+    }
 
     @Override
     public Optional<User> findById(Long userId) {
         Connection connection = connectionPool.getConnection();
-        String sql = "SELECT U.id, U.username, U.password, U.first_name, U.last_name, U.status, U.locked, U.created,\n" +
+        String sql = "SELECT U.id, U.username, U.password, U.first_name, U.first_name, U.status, U.locked, U.created,\n" +
                 "       (SELECT string_agg(UR.role_name, ',') FROM USER_ROLES UR WHERE UR.user_id = U.id) as roles\n" +
                 "FROM USERS U\n" +
                 "WHERE U.id = ?";
@@ -40,43 +50,11 @@ public class JdbcUserDAO implements UserDAO {
             connectionPool.releaseConnection(connection);
         }
     }
-    
-    public Role getRoleByLoginPassword(final String login, final String password) {
-        Role result = Role.UNKNOWN;
-        for (User user : store) {
-            if (user.getUsername().equals(login) && user.getPassword().equals(password)) {
-                result = user.getRole();
-                break;
-            }
-        }
-
-        return result;
-    }
-
-    public boolean userIsExist(final String login, final String password) {
-
-        boolean result = false;
-
-        for (User user : store) {
-            if (user.getUsername().equals(login) && user.getPassword().equals(password)) {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
-    }
-
-    @Override
-    public Role getUserByLoginPassword(String username, String password) {
-        return null;
-    }
-
 
     @Override
     public Optional<User> findByUsername(String username) {
         Connection connection = connectionPool.getConnection();
-        String sql = "SELECT U.id, U.username, U.password, U.first_name, U.last_name, U.status, U.locked, U.created,\n" +
+        String sql = "SELECT U.id, U.username, U.password, U.first_name, U.first_name, U.status, U.locked, U.created,\n" +
                 "       (SELECT string_agg(UR.role_name, ',') FROM USER_ROLES UR WHERE UR.user_id = U.id) as roles\n" +
                 "FROM USERS U\n" +
                 "WHERE U.username = ?";
@@ -146,6 +124,11 @@ public class JdbcUserDAO implements UserDAO {
         }
     }
 
+    @Override
+    public List<User> findAllUsers() {
+        return users;
+    }
+
     private Set<Role> parseUserRoles(String value) {
         if (isBlank(value)) {
             return Collections.emptySet();
@@ -161,7 +144,7 @@ public class JdbcUserDAO implements UserDAO {
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password"));
         user.setFirstName(rs.getString("first_name"));
-        user.setLastName(rs.getString("last_name"));
+        user.setLastName(rs.getString("first_name"));
         user.setStatus(UserStatus.valueOf(rs.getString("status")));
         user.setLocked(rs.getBoolean("locked"));
         Timestamp created = rs.getTimestamp("created");

@@ -46,6 +46,9 @@ public class Booking {
         this.created = LocalDateTime.now();
     }
 
+    public Booking( Long id) {
+    }
+
     public Long getId() {
         return id;
     }

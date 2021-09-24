@@ -1,7 +1,6 @@
 package alex.falendish.model;
 
 import alex.falendish.utils.Identifiable;
-import alex.falendish.utils.Role;
 import alex.falendish.utils.VehicleCategoryType;
 import alex.falendish.utils.VehicleType;
 
@@ -28,15 +27,6 @@ public class BookingRequest implements Identifiable<Long> {
         return id;
     }
 
-    @Override
-    public Role getRole() {
-        return null;
-    }
-
-    @Override
-    public void setRole(Role unknown) {
-
-    }
 
     public void setId(Long id) {
         this.id = id;

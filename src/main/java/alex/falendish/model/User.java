@@ -40,7 +40,7 @@ public class User implements Identifiable<Long> {
         this.created = created;
     }
 
-    public User(Long id, String username, String password, String firstName, String lastName,Set<Role> roles, LocalDateTime created) {
+    public User(Long id, String username, String password, String firstName, String lastName, Set<Role> roles, LocalDateTime created) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -50,18 +50,13 @@ public class User implements Identifiable<Long> {
         this.created = created;
     }
 
+    public User(String s) {
+    }
+
     public Long getId() {
         return id;
     }
 
-    @Override
-    public Role getRole() {
-        return null;
-    }
-
-    @Override
-    public void setRole(Role unknown) {
-    }
     public void setId(Long id) {
         this.id = id;
     }
